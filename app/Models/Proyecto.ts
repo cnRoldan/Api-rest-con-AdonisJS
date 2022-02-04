@@ -3,9 +3,11 @@ import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Auth from './Auth'
 
 export default class Proyecto extends BaseModel {
+  @column()
+  authId:number
 
   @belongsTo(() => Auth)
-  public user: BelongsTo<typeof Auth>
+  public auth: BelongsTo<typeof Auth>
 
   @column({ isPrimary: true })
   public id: number

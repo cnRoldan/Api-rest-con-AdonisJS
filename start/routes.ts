@@ -23,6 +23,7 @@ import Database from '@ioc:Adonis/Lucid/Database';
 
 Route.group( () =>{
   Route.get('proyectos', 'ProyectosController.index');
+  Route.post('proyectos', 'ProyectosController.create');
   Route.post('usuarios/registro', 'UsersController.store');
   Route.get('usuarios', async () => {
     return Database.from('auths').select('*')
