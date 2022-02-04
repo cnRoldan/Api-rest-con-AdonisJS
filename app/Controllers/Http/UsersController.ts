@@ -1,5 +1,3 @@
-import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import User from "App/Models/User";
 import Auth from "App/Models/Auth";
 
 export default class UsersController {
@@ -13,6 +11,13 @@ export default class UsersController {
     } catch {
       return response.badRequest("Invalid credentials");
     }
+  }
+
+  public async logout({ auth }) {
+    await auth.use("api").revoke();
+    return {
+      revoked: true,
+    };
   }
 
   public async store({ request }) {

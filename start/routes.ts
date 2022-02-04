@@ -22,11 +22,13 @@ import Route from '@ioc:Adonis/Core/Route'
 import Database from '@ioc:Adonis/Lucid/Database';
 
 Route.group( () =>{
+  Route.get('proyectos', 'ProyectosController.index');
   Route.post('usuarios/registro', 'UsersController.store');
   Route.get('usuarios', async () => {
     return Database.from('auths').select('*')
   });
   Route.post('login', 'UsersController.login');
+  Route.post('logout', 'UsersController.logout');
 }).prefix('api/v1');
 
 
