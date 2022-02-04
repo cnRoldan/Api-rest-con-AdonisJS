@@ -19,7 +19,14 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import Database from '@ioc:Adonis/Lucid/Database';
 
 Route.group( () =>{
   Route.post('usuarios/registro', 'UsersController.store');
+  Route.get('usuarios', async () => {
+    return Database.from('auths').select('*')
+  });
+  Route.post('login', 'UsersController.login');
 }).prefix('api/v1');
+
+
