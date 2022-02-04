@@ -1,11 +1,11 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
-import User from './User'
+import Auth from './Auth'
 
 export default class Proyecto extends BaseModel {
 
-  @belongsTo(() => User)
-  public user: BelongsTo<typeof User>
+  @belongsTo(() => Auth)
+  public user: BelongsTo<typeof Auth>
 
   @column({ isPrimary: true })
   public id: number
