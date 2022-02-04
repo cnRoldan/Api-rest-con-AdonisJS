@@ -7,13 +7,11 @@ import Proyecto from "App/Models/Proyecto";
 export default class ProyectosController {
 
   public async index({auth}){
-    await auth.use('api').authenticate()
     let user:Auth = auth.use('api').user;
     return await user.related('proyectos').query()
   }
 
   public async create( {auth, request} ){
-    await auth.use('api').authenticate()
     const user:Auth = auth.use('api').user;
     const { nombre } = request.all();
     const proyecto = new Proyecto();
@@ -22,6 +20,10 @@ export default class ProyectosController {
     });
     await user.related('proyectos').save(proyecto);
     return proyecto;
+  }
+
+  public async destroy ( { auth, request, params}){
+    const user:Auth = auth.use('api').user;
   }
 
 }
