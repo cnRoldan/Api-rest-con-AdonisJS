@@ -23,8 +23,8 @@ import Database from '@ioc:Adonis/Lucid/Database';
 
 Route.group( () =>{
   Route.get('proyectos', 'ProyectosController.index').middleware('auth:web,api');
-  Route.post('proyectos', 'ProyectosController.create').middleware('auth:web.api');
-  Route.delete('proyectos/:id', 'ProyectosController.destroy').middleware('auth:web.api');
+  Route.post('proyectos', 'ProyectosController.create').middleware('auth:web,api');
+  Route.delete('proyectos/:id', 'ProyectosController.destroy').middleware('auth:web,api');
   Route.post('usuarios/registro', 'UsersController.store');
   Route.get('usuarios', async () => {
     return Database.from('auths').select('*')
