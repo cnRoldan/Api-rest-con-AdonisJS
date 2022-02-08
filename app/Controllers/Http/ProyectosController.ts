@@ -2,6 +2,7 @@
 
 import Auth from "App/Models/Auth";
 import Proyecto from "App/Models/Proyecto";
+import AutorizacionService from "App/Services/AutorizacionService";
 
 export default class ProyectosController {
   public async index({ auth }) {
@@ -25,13 +26,8 @@ export default class ProyectosController {
     const { id } = params;
     const proyecto = await Proyecto.find(id);
     if (proyecto != null) {
-      if (proyecto.authId == user.id) {
-        await proyecto.delete();
-      }else{
-        return response.status(403).json({
-          mensaje: "No puede eliminar un proyecto que no le pertenece"
-        })
-      }
+      AutorizacionService.verificarPermiso(proyecto, user);
+      await proyecto.delete();
     }else{
       return response.status(404).json({
         mensaje: "No existe ningún proyecto con este id"
