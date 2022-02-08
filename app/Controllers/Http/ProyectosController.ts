@@ -25,13 +25,9 @@ export default class ProyectosController {
     const user: Auth = auth.use("api").user;
     const { id } = params;
     const proyecto = await Proyecto.find(id);
-    if (proyecto != null) {
-      AutorizacionService.verificarPermiso(proyecto, user);
+    AutorizacionService.verificarPermiso(proyecto, user);
+    if (proyecto){
       await proyecto.delete();
-    }else{
-      return response.status(404).json({
-        mensaje: "No existe ningún proyecto con este id"
-      })
     }
     return proyecto;
   }
